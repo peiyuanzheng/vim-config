@@ -6,7 +6,7 @@
 "       Version: 1.3
 
 "Install in $VIMRUNTIME/autoload
-"add `call restore_view#auto()` in .vimrc
+"add `call restoreview#auto()` in .vimrc
 
 
 if exists("g:loaded_restore_view") || &cp
@@ -18,7 +18,7 @@ if !exists("g:skipview_files")
   let g:skipview_files = []
 endif
 
-function! restore_view#auto() abort "{{{
+function! restoreview#auto() abort "{{{
   augroup AutoView
     autocmd!
     " Autosave & Load Views.

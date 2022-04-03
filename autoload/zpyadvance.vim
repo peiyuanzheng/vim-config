@@ -40,18 +40,16 @@ endfunction "}}}
 
 
 function! s:LeaderF() "{{{
-  "let g:Lf_ShortcutB = '<m-n>'
   let g:Lf_ShortcutF = '<c-p>'
   noremap <c-m> :LeaderfMru<cr>
-  noremap <m-f> :LeaderfFunction!<cr>
   noremap <m-b> :LeaderfBuffer<cr>
+  noremap <m-f> :LeaderfFunction<cr>
   noremap <m-t> :LeaderfTag<cr>
 
-  " 通过Leaderf rg在当前缓存中搜索光标下的字符串，需按回车确认。
-  noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+  " 通过Leaderf rg在当前buffer中搜索光标下的字符串，需按回车确认。
+  noremap `b :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
   " 通过Leaderf rg搜索光标下的字符串，需按回车确认。
-  noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
-  " search visually selected text literally
+  noremap `f :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
   " 通过Leaderf rg搜索高亮文本
   xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
   " 打开最近一次Leaderf rg搜索窗口
@@ -65,6 +63,7 @@ function! s:LeaderF() "{{{
   let g:Lf_WindowHeight = 0.3
   let g:Lf_ShowRelativePath = 0
   let g:Lf_CacheDirectory = expand('~/.vim/cache')
+  let g:Lf_StlColorscheme = 'gruvbox_material'
   let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
   let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
   let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
