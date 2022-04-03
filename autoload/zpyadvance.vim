@@ -40,11 +40,16 @@ endfunction "}}}
 
 
 function! s:LeaderF() "{{{
+  " 搜索当前项目目录下的文件
   let g:Lf_ShortcutF = '<c-p>'
+  " 搜索最近打开的文件
   noremap <c-m> :LeaderfMru<cr>
+  " 搜索buffer
   noremap <m-b> :LeaderfBuffer<cr>
+  " 搜索当前文件中的函数
   noremap <m-f> :LeaderfFunction<cr>
-  noremap <m-t> :LeaderfTag<cr>
+  " 搜索当前文件中的tags
+  noremap <m-t> :LeaderfBufTag<cr>
 
   " 通过Leaderf rg在当前buffer中搜索光标下的字符串，需按回车确认。
   noremap `b :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
