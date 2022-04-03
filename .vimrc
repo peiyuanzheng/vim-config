@@ -19,4 +19,5 @@ call plug#end()
 
 
 call zpybasic#config()
+call zpyadvance#config()
 call restore_view#auto()
