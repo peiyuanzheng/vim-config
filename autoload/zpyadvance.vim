@@ -14,6 +14,7 @@ let g:loaded_zpyadvance = 1
 function! zpyadvance#config() abort "{{{
   call s:Ack()
   call s:Nerdtree()
+  call s:LeaderF()
 endfunction "}}}
 
 
@@ -38,11 +39,35 @@ function! s:Nerdtree() "{{{
 endfunction "}}}
 
 
-function! s:VimTmuxNavigator() "{{{
-  " write the current buffer (only if changed) before navigating from Vim to tmux pane
-  let g:tmux_navigator_save_on_switch = 1
-  " Disable tmux navigator when zooming the Vim pane
-  let g:tmux_navigator_disable_when_zoomed = 1
+function! s:LeaderF() "{{{
+  "let g:Lf_ShortcutB = '<m-n>'
+  let g:Lf_ShortcutF = '<c-p>'
+  noremap <c-m> :LeaderfMru<cr>
+  noremap <m-f> :LeaderfFunction!<cr>
+  noremap <m-b> :LeaderfBuffer<cr>
+  noremap <m-t> :LeaderfTag<cr>
+
+  " 通过Leaderf rg在当前缓存中搜索光标下的字符串，需按回车确认。
+  noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+  " 通过Leaderf rg搜索光标下的字符串，需按回车确认。
+  noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+  " search visually selected text literally
+  " 通过Leaderf rg搜索高亮文本
+  xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+  " 打开最近一次Leaderf rg搜索窗口
+  noremap go :<C-U>Leaderf! rg --recall<CR>
+
+  let g:Lf_HideHelp = 1
+  let g:Lf_UseCache = 0
+  let g:Lf_UseVersionControlTool = 0
+  let g:Lf_PreviewInPopup = 1
+  let g:Lf_WorkingDirectoryMode = 'Ac'
+  let g:Lf_WindowHeight = 0.3
+  let g:Lf_ShowRelativePath = 0
+  let g:Lf_CacheDirectory = expand('~/.vim/cache')
+  let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+  let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+  let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 endfunction "}}}
 
 

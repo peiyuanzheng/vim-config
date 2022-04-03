@@ -7,9 +7,10 @@ endif
 
 call plug#begin()
 
-Plug 'peiyuanzheng/vim-config'
 Plug 'morhetz/gruvbox'
+Plug 'peiyuanzheng/vim-config'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
