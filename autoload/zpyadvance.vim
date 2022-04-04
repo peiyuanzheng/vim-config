@@ -12,18 +12,9 @@ let g:loaded_zpyadvance = 1
 
 
 function! zpyadvance#config() abort "{{{
-  call s:Ack()
   call s:Nerdtree()
   call s:LeaderF()
-endfunction "}}}
-
-
-function! s:Ack() "{{{
-  if executable('ag')
-    let g:ackprg = 'ag -U --vimgrep --ignore build'
-  endif
-  nnoremap <silent> <F2> :Ack -s <C-R>=expand("<cword>")<CR><CR>
-  nnoremap <silent> <F3> :Ack -sw <C-R>=expand("<cword>")<CR><CR>
+  call s:COC()
 endfunction "}}}
 
 
@@ -40,22 +31,22 @@ endfunction "}}}
 
 
 function! s:LeaderF() "{{{
-  " 搜索当前项目目录下的文件
-  let g:Lf_ShortcutF = '<c-p>'
-  " 搜索最近打开的文件
-  noremap <c-m> :LeaderfMru<cr>
-  " 搜索buffer
+  " 搜索当前项目目录下的文件 (p:project)
+  let g:Lf_ShortcutF = '<m-p>'
+  " 搜索最近打开的文件 (u:used)
+  noremap <m-u> :LeaderfMru<cr>
+  " 搜索buffer (b:buffer)
   noremap <m-b> :LeaderfBuffer<cr>
-  " 搜索当前文件中的函数
-  noremap <m-f> :LeaderfFunction<cr>
-  " 搜索当前文件中的tags
+  " 搜索当前文件中的函数 (m:method)
+  noremap <m-m> :LeaderfFunction<cr>
+  " 搜索当前文件中的tags (t:tags)
   noremap <m-t> :LeaderfBufTag<cr>
 
-  " 通过Leaderf rg在当前buffer中搜索光标下的字符串，需按回车确认。
+  " 在当前buffer中搜索光标下的字符串，需按回车确认。
   noremap `b :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
-  " 通过Leaderf rg搜索光标下的字符串，需按回车确认。
+  " 搜索光标下的字符串，需按回车确认。
   noremap `f :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
-  " 通过Leaderf rg搜索高亮文本
+  " 搜索高亮文本
   xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
   " 打开最近一次Leaderf rg搜索窗口
   noremap go :<C-U>Leaderf! rg --recall<CR>
@@ -66,12 +57,73 @@ function! s:LeaderF() "{{{
   let g:Lf_PreviewInPopup = 1
   let g:Lf_WorkingDirectoryMode = 'Ac'
   let g:Lf_WindowHeight = 0.3
-  let g:Lf_ShowRelativePath = 0
+  let g:Lf_ShowRelativePath = 1
   let g:Lf_CacheDirectory = expand('~/.vim/cache')
   let g:Lf_StlColorscheme = 'gruvbox_material'
   let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
   let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
   let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+endfunction "}}}
+
+
+function! s:COC() "{{{
+  " Use tab for trigger completion with characters ahead and navigate.
+  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+  " other plugin before putting this into your config.
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>CheckBackSpace() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  function! s:CheckBackSpace() abort "{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction "}}}
+  " Make <CR> auto-select the first completion item and notify coc.nvim to
+  " format on enter, <cr> could be remapped by other vim plugin
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+        \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+  " Trigger completion
+  inoremap <silent><expr> <m-,> coc#refresh()
+
+  " Use `[g` and `]g` to navigate diagnostics
+  " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+  nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
+  nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
+
+  " GoTo code navigation.
+  nnoremap <silent> gd <Plug>(coc-definition)
+  nnoremap <silent> gt <Plug>(coc-type-definition)
+  nnoremap <silent> gi <Plug>(coc-implementation)
+  nnoremap <silent> gr <Plug>(coc-references)
+
+  " Use K to show documentation in preview window.
+  nnoremap <silent> K :call <SID>ShowDocument()<CR>
+  function! s:ShowDocument()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+      call CocActionAsync('doHover')
+    else
+      execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+  endfunction
+
+  " Highlight the symbol and its references when holding the cursor.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  " Symbol renaming.
+  nnoremap <leader>rn <Plug>(coc-rename)
+  " Remap keys for applying codeAction to the current buffer.
+  "nnoremap <leader>ac <Plug>(coc-codeaction)
+  " Apply AutoFix to problem on the current line.
+  nnoremap <leader>qf <Plug>(coc-fix-current)
+
+  " Formatting selected code.
+  "xmap <leader>f <Plug>(coc-format-selected)
+  "nmap <leader>f <Plug>(coc-format-selected)
+
 endfunction "}}}
 
 

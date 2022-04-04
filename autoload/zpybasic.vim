@@ -20,6 +20,7 @@ endfunction "}}}
 
 
 function s:Common() "{{{
+
   if has('autocmd')
     filetype plugin indent on
   endif
@@ -40,6 +41,16 @@ function s:Common() "{{{
   set expandtab
   set smarttab
 
+  set ignorecase
+  set smartcase
+  set incsearch
+  set hlsearch
+
+  " Always show the signcolumn, otherwise it would shift the text each time
+  " diagnostics appear/become resolved.
+  set signcolumn=number
+  " Give more space for displaying messages.
+  set cmdheight=2
   " always show the status bar
   set laststatus=2
   " show the cursor position all the time
@@ -50,6 +61,7 @@ function s:Common() "{{{
   set wildmenu
   set linebreak
   set number
+  set relativenumber
   autocmd FileType c,cpp,python setlocal textwidth=100
   autocmd FileType java setlocal textwidth=120
 
@@ -83,9 +95,6 @@ function s:Common() "{{{
 
   " Delete comment character when joining commented lines
   set formatoptions+=j
-
-  " set to auto read when a file is changed from the outside
-  set autoread
 
   if &history < 1000
     set history=1000
@@ -130,11 +139,14 @@ function s:Common() "{{{
   set noswapfile
   set noundofile
   set hidden
+  set autoread
 
-  set ignorecase
-  set smartcase
-  set incsearch
-  set hlsearch
+  " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+  " delays and poor user experience.
+  set updatetime=300
+
+  " Don't pass messages to |ins-completion-menu|.
+  set shortmess+=c
 
   set foldmethod=indent
   set foldlevelstart=1
@@ -142,6 +154,7 @@ function s:Common() "{{{
   set mouse=
   " don't make noise
   set vb t_vb=
+
 endfunction "}}}
 
 
@@ -159,7 +172,7 @@ function s:Mapping() "{{{
 
   "----- netrw
   let g:netrw_winsize=30
-  nnoremap <silent> <leader>fe :Sexplore!<CR>
+  nnoremap <silent><leader>fe :Sexplore!<CR>
 
   "----- about vimrc
   nnoremap <silent><leader>sr :source ~/.vimrc<cr>
