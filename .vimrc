@@ -9,7 +9,7 @@ call plug#begin()
 
 Plug 'morhetz/gruvbox'
 Plug 'peiyuanzheng/vim-config'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

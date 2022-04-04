@@ -19,14 +19,14 @@ endfunction "}}}
 
 
 function! s:Nerdtree() "{{{
-  let g:NERDChristmasTree = 1
-  let g:NERDTreeDirArrows = 0
   let g:NERDTreeShowBookmarks = 1
   let g:NERDTreeShowHidden = 1
   let g:NERDTreeShowLineNumbers=1
   let g:NERDTreeWinSize = 40
   let g:NERDTreeIgnore = ['\.svn$', '\~$', '\.o$', '\.pyc$']
-  nnoremap <silent> <F9> :NERDTreeToggle<CR>
+  " Exit Vim if NERDTree is the only window remaining in the only tab.
+  autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+  nnoremap <silent> <m-n> :NERDTreeToggle<CR>
 endfunction "}}}
 
 

@@ -149,7 +149,7 @@ function s:Common() "{{{
   set shortmess+=c
 
   set foldmethod=indent
-  set foldlevelstart=6
+  set foldlevelstart=10
 
   set mouse=
   " don't make noise
