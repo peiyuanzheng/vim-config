@@ -48,7 +48,7 @@ function s:Common() "{{{
 
   " Always show the signcolumn, otherwise it would shift the text each time
   " diagnostics appear/become resolved.
-  set signcolumn=number
+  set signcolumn=yes
   " Give more space for displaying messages.
   set cmdheight=2
   " always show the status bar
@@ -149,7 +149,7 @@ function s:Common() "{{{
   set shortmess+=c
 
   set foldmethod=indent
-  set foldlevelstart=1
+  set foldlevelstart=6
 
   set mouse=
   " don't make noise
