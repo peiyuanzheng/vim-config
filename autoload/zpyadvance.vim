@@ -67,6 +67,9 @@ endfunction "}}}
 
 
 function! s:COC() "{{{
+  " When CocList is enabled, use 'o' and '<c-o>' to switch between
+  " insert and normal mode. 'ESC' to cancel list.
+
   let g:coc_disable_transparent_cursor = 1
 
   " Use tab for trigger completion with characters ahead and navigate.

@@ -8,12 +8,13 @@ endif
 call plug#begin()
 
 Plug 'morhetz/gruvbox'
-Plug 'peiyuanzheng/vim-config'
 Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+
+Plug 'peiyuanzheng/vim-config'
 
 " Initialize plugin system
 call plug#end()
