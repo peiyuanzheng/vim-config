@@ -12,13 +12,13 @@ let g:loaded_zpyadvance = 1
 
 
 function! zpyadvance#config() abort "{{{
-  call s:Nerdtree()
-  call s:LeaderF()
-  call s:COC()
+  call s:nerdtree()
+  call s:leaderf()
+  call s:coc()
 endfunction "}}}
 
 
-function! s:Nerdtree() "{{{
+function! s:nerdtree() "{{{
   let g:NERDTreeShowBookmarks = 1
   let g:NERDTreeShowHidden = 1
   let g:NERDTreeShowLineNumbers=1
@@ -30,7 +30,7 @@ function! s:Nerdtree() "{{{
 endfunction "}}}
 
 
-function! s:LeaderF() "{{{
+function! s:leaderf() "{{{
   " 搜索当前项目目录下的文件 (p:project)
   let g:Lf_ShortcutF = '<m-p>'
   " 搜索最近打开的文件 (u:used)
@@ -66,7 +66,7 @@ function! s:LeaderF() "{{{
 endfunction "}}}
 
 
-function! s:COC() "{{{
+function! s:coc() "{{{
   " When CocList is enabled, use 'o' and '<c-o>' to switch between
   " insert and normal mode. 'ESC' to cancel list.
 
@@ -77,10 +77,10 @@ function! s:COC() "{{{
   " other plugin before putting this into your config.
   inoremap <silent><expr> <TAB>
         \ pumvisible() ? "\<C-n>" :
-        \ <SID>CheckBackSpace() ? "\<TAB>" :
+        \ <SID>check_backspace() ? "\<TAB>" :
         \ coc#refresh()
   inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-  function! s:CheckBackSpace() abort "{{{
+  function! s:check_backspace() abort "{{{
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
   endfunction "}}}
@@ -104,8 +104,8 @@ function! s:COC() "{{{
   nnoremap <silent> gr <Plug>(coc-references)
 
   " Use K to show documentation in preview window.
-  nnoremap <silent> K :call <SID>ShowDocument()<CR>
-  function! s:ShowDocument()
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
       execute 'h '.expand('<cword>')
     elseif (coc#rpc#ready())

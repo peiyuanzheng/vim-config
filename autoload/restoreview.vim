@@ -22,12 +22,12 @@ function! restoreview#auto() abort "{{{
   augroup AutoView
     autocmd!
     " Autosave & Load Views.
-    autocmd BufWritePre,BufWinLeave ?* if s:MakeViewCheck() | silent! mkview | endif
-    autocmd BufWinEnter ?* if s:MakeViewCheck() | silent! loadview | endif
+    autocmd BufWritePre,BufWinLeave ?* if s:make_view_check() | silent! mkview | endif
+    autocmd BufWinEnter ?* if s:make_view_check() | silent! loadview | endif
   augroup END
 endfunction "}}}
 
-function s:MakeViewCheck() "{{{
+function s:make_view_check() "{{{
   if &l:diff | return 0 | endif
   if &buftype != '' | return 0 | endif
   if expand('%') =~ '\[.*\]' | return 0 | endif

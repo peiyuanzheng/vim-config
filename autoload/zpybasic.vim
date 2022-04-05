@@ -14,13 +14,12 @@ let g:loaded_zpybasic = 1
 
 
 function! zpybasic#config() abort "{{{
-  call s:Common()
-  call s:Mapping()
+  call s:common()
+  call s:mappings()
 endfunction "}}}
 
 
-function s:Common() "{{{
-
+function s:common() "{{{
   if has('autocmd')
     filetype plugin indent on
   endif
@@ -154,11 +153,10 @@ function s:Common() "{{{
   set mouse=
   " don't make noise
   set vb t_vb=
-
 endfunction "}}}
 
 
-function s:Mapping() "{{{
+function s:mappings() "{{{
   "----- shortcuts about split
   nnoremap wv <C-w>v
   nnoremap wc <C-w>c
