@@ -14,6 +14,8 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
+Plug 'ryanoasis/vim-devicons'
+
 Plug 'peiyuanzheng/vim-config'
 
 " Initialize plugin system
