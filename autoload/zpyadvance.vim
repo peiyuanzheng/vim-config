@@ -57,6 +57,7 @@ function! s:leaderf() "{{{
   let g:Lf_PreviewInPopup = 1
   let g:Lf_WorkingDirectoryMode = 'Ac'
   let g:Lf_WindowHeight = 0.3
+  let g:Lf_WindowPosition = 'popup'
   let g:Lf_ShowRelativePath = 1
   let g:Lf_CacheDirectory = expand('~/.vim/cache')
   let g:Lf_StlColorscheme = 'gruvbox_material'
