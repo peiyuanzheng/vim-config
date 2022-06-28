@@ -8,7 +8,7 @@
 - 文件浏览：[preservim/nerdtree](https://github.com/preservim/nerdtree)
 - 文件切换、函数列表：[Yggdroot/LeaderF](https://github.com/Yggdroot/LeaderF)
 - 文本查找：ripgrep + [Yggdroot/LeaderF](https://github.com/Yggdroot/LeaderF)
-- c++ 自动补全和跳转：[neoclide/coc.nvim](https://github.com/neoclide/coc.nvim) + ccls
+- c++ 自动补全和跳转：[neoclide/coc.nvim](https://github.com/neoclide/coc.nvim) + [ccls](https://github.com/MaskRay/ccls)
 - 代码检查(TODO)：[ALE](https://github.com/dense-analysis/ale)
 - 任务系统(TODO)：[asyncrun](https://github.com/skywind3000/asyncrun.vim)、[aynctasks](https://github.com/skywind3000/asynctasks.vim)
 
@@ -46,6 +46,5 @@ brew install ccls
 ## 参考
 
 * [vim搭建c/c++开发环境](https://www.zhihu.com/question/47691414/answer/373700711)
-* [ccls](https://github.com/MaskRay/ccls)
 * [Configure coc.nvim for C/C++ Development](https://ianding.io/2019/07/29/configure-coc-nvim-for-c-c++-development/)
   * 查找system include路径：`g++ -E -x c++ - -v < /dev/null`，在输出结果`#include <...> search starts here`的后面字符串。
