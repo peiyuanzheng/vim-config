@@ -2,13 +2,13 @@
 
 ## 功能列表
 
-- 插件管理：`junegunn/vim-plug`
+- 插件管理：[junegunn/vim-plug](https://github.com/junegunn/vim-plug)
 - 常用配置：详见`peiyuanzheng/vim-config/autoload/zpybasic.vim`
-- 颜色主题：`morhetz/gruvbox`
-- 文件浏览：`preservim/nerdtree`
-- 文件切换、函数列表：`Yggdroot/LeaderF`
-- 文本查找：ripgrep + `Yggdroot/LeaderF`
-- c++ 自动补全和跳转：`neoclide/coc.nvim` + ccls
+- 颜色主题：[morhetz/gruvbox](https://github.com/morhetz/gruvbox)
+- 文件浏览：[preservim/nerdtree](https://github.com/preservim/nerdtree)
+- 文件切换、函数列表：[Yggdroot/LeaderF](https://github.com/Yggdroot/LeaderF)
+- 文本查找：ripgrep + [Yggdroot/LeaderF](https://github.com/Yggdroot/LeaderF)
+- c++ 自动补全和跳转：[neoclide/coc.nvim](https://github.com/neoclide/coc.nvim) + ccls
 - 代码检查(TODO)：[ALE](https://github.com/dense-analysis/ale)
 - 任务系统(TODO)：[asyncrun](https://github.com/skywind3000/asyncrun.vim)、[aynctasks](https://github.com/skywind3000/asynctasks.vim)
 
