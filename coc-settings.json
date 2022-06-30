@@ -1,0 +1,23 @@
+{
+    "list.maxPreviewHeight": 25,
+    "diagnostic.enable": false,
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "args": ["--log-file=.ccls.log", "-v=1"],
+            "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+            "rootPatterns": [".ccls-root"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": ".cache/ccls"
+                },
+                "highlight": {
+                    "lsRanges" : true
+                },
+                "client": {
+                    "snippetSupport": true
+                }
+            }
+        }
+    }
+}

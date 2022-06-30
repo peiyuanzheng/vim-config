@@ -33,8 +33,9 @@ brew install ccls
 
 ### 安装插件集
 
-* 下载项目内的`.vimrc`放于`~/`下。
-* 打开vim（先忽略报错），执行`:PlugInstall`，等待完成即可使用。
+* 下载项目内的`.vimrc`放于`~/`下
+* 打开vim（先忽略报错），执行`:PlugInstall`
+* 执行`cd ~/.vim && ln -snf plugged/vim-config/coc-settings.json`
 
 
 ## 使用
