@@ -90,9 +90,6 @@ function! s:coc() "{{{
   inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
         \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-  " Trigger completion
-  inoremap <silent><expr> <m-,> coc#refresh()
-
   " Use `[g` and `]g` to navigate diagnostics
   " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
   nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -129,6 +126,11 @@ function! s:coc() "{{{
   " Formatting selected code.
   "xmap <leader>f <Plug>(coc-format-selected)
   "nmap <leader>f <Plug>(coc-format-selected)
+
+  " Find symbol of current document.
+  nnoremap <silent><nowait> <leader>co :<C-u>CocList outline<cr>
+  " Resume latest coc list.
+  nnoremap <silent><nowait> <leader>cr :<C-u>CocListResume<CR>
 
 endfunction "}}}
 
