@@ -47,5 +47,6 @@ brew install ccls
 ## 参考
 
 * [vim搭建c/c++开发环境](https://www.zhihu.com/question/47691414/answer/373700711)
+* [ccls project setup](https://github.com/MaskRay/ccls/wiki/Project-Setup)
 * [Configure coc.nvim for C/C++ Development](https://ianding.io/2019/07/29/configure-coc-nvim-for-c-c++-development/)
   * 查找system include路径：`g++ -E -x c++ - -v < /dev/null`，在输出结果`#include <...> search starts here`的后面字符串。
