@@ -43,13 +43,13 @@ function! s:leaderf() "{{{
   noremap <m-t> :LeaderfBufTag<cr>
 
   " 在当前buffer中搜索光标下的字符串，需按回车确认。
-  noremap `b :<C-U><C-R>=printf("Leaderf rg --current-buffer -e %s ", expand("<cword>"))<CR>
+  noremap `b :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
   " 搜索光标下的字符串，需按回车确认。
-  noremap `f :<C-U><C-R>=printf("Leaderf rg -e %s ", expand("<cword>"))<CR>
+  noremap `f :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
   " 搜索高亮文本
-  xnoremap `v :<C-U><C-R>=printf("Leaderf rg -F -e %s ", leaderf#Rg#visual())<CR>
+  xnoremap `v :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
   " 打开最近一次Leaderf rg搜索窗口
-  noremap `o :<C-U>Leaderf rg --recall<CR>
+  noremap `o :<C-U>Leaderf! rg --recall<CR>
 
   let g:Lf_HideHelp = 1
   let g:Lf_UseCache = 0
