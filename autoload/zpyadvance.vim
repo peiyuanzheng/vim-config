@@ -63,7 +63,7 @@ function! s:leaderf() "{{{
   let g:Lf_StlColorscheme = 'gruvbox_material'
   let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
   let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
-  let g:Lf_PreviewResult = {'Mru':1, 'Function':1, 'BufTag':1, 'Rg':1}
+  let g:Lf_PreviewResult = {'Function':1, 'BufTag':1, 'Rg':1, 'Mru':0}
 endfunction "}}}
 
 
