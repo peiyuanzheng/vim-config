@@ -100,6 +100,24 @@ function! s:coc() "{{{
   nnoremap <silent> gt <Plug>(coc-type-definition)
   nnoremap <silent> gi <Plug>(coc-implementation)
   nnoremap <silent> gr <Plug>(coc-references)
+  " bases
+  nnoremap <silent> <leader>jb :call CocLocations('ccls','$ccls/inheritance')<cr>
+  " bases of up to 3 levels
+  nnoremap <silent> <leader>jB :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
+  " derived
+  nnoremap <silent> <leader>jd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
+  " derived of up to 3 levels
+  nnoremap <silent> <leader>jD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
+  " caller
+  nnoremap <silent> <leader>jc :call CocLocations('ccls','$ccls/call')<cr>
+  " callee
+  nnoremap <silent> <leader>jC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
+  " member variables / variables in a namespace
+  nnoremap <silent> <leader>jm :call CocLocations('ccls','$ccls/member')<cr>
+  " member functions / functions in a namespace
+  nnoremap <silent> <leader>jf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
+  " nested classes / types in a namespace
+  nnoremap <silent> <leader>js :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
 
   " Use K to show documentation in preview window.
   nnoremap <silent> K :call <SID>show_documentation()<CR>

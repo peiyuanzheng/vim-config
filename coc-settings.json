@@ -1,11 +1,15 @@
 {
     "list.maxPreviewHeight": 25,
     "diagnostic.enable": false,
+    "workspace.rootPatterns":[
+    ],
+    "workspace.workspaceFolderFallbackCwd": false,
     "languageserver": {
         "ccls": {
             "command": "ccls",
+            "args": ["--log-file=.ccls.log"],
             "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-            "rootPatterns": [".ccls-root"],
+            "rootPatterns": ["compile_commands.json"],
             "initializationOptions": {
                 "cache": {
                     "directory": ".cache/ccls"
