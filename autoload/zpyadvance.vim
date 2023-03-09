@@ -51,6 +51,18 @@ function! s:leaderf() "{{{
   " 打开最近一次Leaderf rg搜索窗口
   noremap `o :<C-U>Leaderf! rg --recall<CR>
 
+  " gtags
+  " 搜索当前光标下字符串的引用
+  noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+  " 搜索当前光标下字符串的定义
+  noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+  " 打开最近一次的搜索结果
+  noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+  " 跳转到最近一次的搜索结果的下一条
+  noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+  " 跳转到最近一次的搜索结果的上一条
+  noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
+
   let g:Lf_HideHelp = 1
   let g:Lf_FollowLinks = 1
   let g:Lf_UseMemoryCache = 1
@@ -61,11 +73,22 @@ function! s:leaderf() "{{{
   let g:Lf_WindowHeight = 0.3
   "let g:Lf_WindowPosition = 'popup'
   let g:Lf_ShowRelativePath = 1
-  let g:Lf_CacheDirectory = expand('~/.vim/cache')
+  "let g:Lf_CacheDirectory = expand('~/.vim/cache')
   let g:Lf_StlColorscheme = 'gruvbox_material'
   let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
-  let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
-  let g:Lf_PreviewResult = {'Function':1, 'BufTag':1, 'Rg':1, 'Mru':0}
+  let g:Lf_RootMarkers = ['.root']
+  let g:Lf_PreviewResult = {'Function':1, 'BufTag':1, 'Rg':1, 'Gtags':1}
+
+  let g:Lf_GtagsAutoGenerate = 1
+  let g:Lf_GtagsSkipUnreadable = 1
+  let g:Lf_GtagsHigherThan6_6_2 = 0 " donot skip symlink
+  " 可以在 $HOME/.globalrc 中添加 gtags 文件黑名单
+endfunction "}}}
+
+
+function! s:check_backspace() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction "}}}
 
 
@@ -75,21 +98,20 @@ function! s:coc() "{{{
 
   let g:coc_disable_transparent_cursor = 1
 
-  " Use tab for trigger completion with characters ahead and navigate.
+  " Use tab for trigger completion with characters ahead and navigate
+  " NOTE: There's always complete item selected by default, you may want to enable
+  " no select by `"suggest.noselect": true` in your configuration file
   " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-  " other plugin before putting this into your config.
+  " other plugin before putting this into your config
   inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_backspace() ? "\<TAB>" :
+        \ coc#pum#visible() ? coc#pum#next(1) :
+        \ <SID>check_backspace() ? "\<Tab>" :
         \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-  function! s:check_backspace() abort "{{{
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-  endfunction "}}}
-  " Make <CR> auto-select the first completion item and notify coc.nvim to
-  " format on enter, <cr> could be remapped by other vim plugin
-  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+  inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+  " Make <CR> to accept selected completion item or notify coc.nvim to format
+  " <C-g>u breaks current undo, please make your own choice
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
         \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
   " Use `[g` and `]g` to navigate diagnostics
@@ -98,38 +120,20 @@ function! s:coc() "{{{
   nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
 
   " GoTo code navigation.
-  nnoremap <silent> gd <Plug>(coc-definition)
+  nnoremap <silent> ge <Plug>(coc-definition)
   nnoremap <silent> gt <Plug>(coc-type-definition)
   nnoremap <silent> gi <Plug>(coc-implementation)
   nnoremap <silent> gr <Plug>(coc-references)
-  " bases
-  nnoremap <silent> <leader>jb :call CocLocations('ccls','$ccls/inheritance')<cr>
-  " bases of up to 3 levels
-  nnoremap <silent> <leader>jB :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
-  " derived
-  nnoremap <silent> <leader>jd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
-  " derived of up to 3 levels
-  nnoremap <silent> <leader>jD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
-  " caller
-  nnoremap <silent> <leader>jc :call CocLocations('ccls','$ccls/call')<cr>
-  " callee
-  nnoremap <silent> <leader>jC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
-  " member variables / variables in a namespace
-  nnoremap <silent> <leader>jm :call CocLocations('ccls','$ccls/member')<cr>
-  " member functions / functions in a namespace
-  nnoremap <silent> <leader>jf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
-  " nested classes / types in a namespace
-  nnoremap <silent> <leader>js :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
+
+  call <SID>coc_ccls()
 
   " Use K to show documentation in preview window.
   nnoremap <silent> K :call <SID>show_documentation()<CR>
   function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-      execute 'h '.expand('<cword>')
-    elseif (coc#rpc#ready())
+    if CocAction('hasProvider', 'hover')
       call CocActionAsync('doHover')
     else
-      execute '!' . &keywordprg . " " . expand('<cword>')
+      call feedkeys('K', 'in')
     endif
   endfunction
 
@@ -151,7 +155,28 @@ function! s:coc() "{{{
   nnoremap <silent><nowait> <leader>co :<C-u>CocList outline<cr>
   " Resume latest coc list.
   nnoremap <silent><nowait> <leader>cr :<C-u>CocListResume<CR>
+endfunction "}}}
 
+
+function! s:coc_ccls() "{{{
+  " bases
+  nnoremap <silent> <leader>jb :call CocLocations('ccls','$ccls/inheritance')<cr>
+  " bases of up to 3 levels
+  nnoremap <silent> <leader>jB :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
+  " derived
+  nnoremap <silent> <leader>jd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
+  " derived of up to 3 levels
+  nnoremap <silent> <leader>jD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
+  " caller
+  nnoremap <silent> <leader>jc :call CocLocations('ccls','$ccls/call')<cr>
+  " callee
+  nnoremap <silent> <leader>jC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
+  " member variables / variables in a namespace
+  nnoremap <silent> <leader>jm :call CocLocations('ccls','$ccls/member')<cr>
+  " member functions / functions in a namespace
+  nnoremap <silent> <leader>jf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
+  " nested classes / types in a namespace
+  nnoremap <silent> <leader>js :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
 endfunction "}}}
 
 

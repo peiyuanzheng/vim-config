@@ -19,6 +19,9 @@
                 },
                 "client": {
                     "snippetSupport": true
+                },
+                "clang": {
+                    "extraArgs": [ "-std=c++17" ]
                 }
             }
         }
