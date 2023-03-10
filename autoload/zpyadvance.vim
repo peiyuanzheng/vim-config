@@ -43,21 +43,21 @@ function! s:leaderf() "{{{
   noremap <m-t> :LeaderfBufTag<cr>
 
   " 在当前buffer中搜索光标下的字符串，需按回车确认。
-  noremap `b :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+  noremap `b :<C-U><C-R>=printf("Leaderf rg --current-buffer -e %s ", expand("<cword>"))<CR>
   " 搜索光标下的字符串，需按回车确认。
-  noremap `f :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+  noremap `f :<C-U><C-R>=printf("Leaderf rg -e %s ", expand("<cword>"))<CR>
   " 搜索高亮文本
-  xnoremap `v :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+  xnoremap `v :<C-U><C-R>=printf("Leaderf rg -F -e %s ", leaderf#Rg#visual())<CR>
   " 打开最近一次Leaderf rg搜索窗口
-  noremap `o :<C-U>Leaderf! rg --recall<CR>
+  noremap `o :<C-U>Leaderf rg --recall<CR>
 
   " gtags
   " 搜索当前光标下字符串的引用
-  noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+  noremap <leader>fr :<C-U><C-R>=printf("Leaderf gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
   " 搜索当前光标下字符串的定义
-  noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+  noremap <leader>fd :<C-U><C-R>=printf("Leaderf gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
   " 打开最近一次的搜索结果
-  noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+  noremap <leader>fo :<C-U><C-R>=printf("Leaderf gtags --recall %s", "")<CR><CR>
   " 跳转到最近一次的搜索结果的下一条
   noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
   " 跳转到最近一次的搜索结果的上一条
@@ -79,10 +79,9 @@ function! s:leaderf() "{{{
   let g:Lf_RootMarkers = ['.root']
   let g:Lf_PreviewResult = {'Function':1, 'BufTag':1, 'Rg':1, 'Gtags':1}
 
-  let g:Lf_GtagsAutoGenerate = 1
+  let g:Lf_GtagsAutoGenerate = 1 " 生成的 tags 目录: $HOME/.LfCache/gtags/
   let g:Lf_GtagsSkipUnreadable = 1
-  let g:Lf_GtagsHigherThan6_6_2 = 0 " donot skip symlink
-  " 可以在 $HOME/.globalrc 中添加 gtags 文件黑名单
+  let g:Lf_GtagsHigherThan6_6_2 = 0 " 不跳过 symlink; 可在 $HOME/.globalrc 中添加文件黑名单
 endfunction "}}}
 
 
