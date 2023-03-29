@@ -33,7 +33,9 @@ endfunction "}}}
 function! s:leaderf() "{{{
   " 搜索当前项目目录下的文件 (p:project)
   let g:Lf_ShortcutF = '<m-p>'
-  " 搜索最近打开的文件 (u:used)
+  " 搜索当前项目目录最近打开的文件
+  noremap <m-o> :Leaderf mru --project<cr>
+  " 搜索全局最近打开的文件 (u:used)
   noremap <m-u> :LeaderfMru<cr>
   " 搜索buffer (b:buffer)
   noremap <m-b> :LeaderfBuffer<cr>
