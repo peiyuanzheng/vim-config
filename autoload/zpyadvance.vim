@@ -55,9 +55,11 @@ function! s:leaderf() "{{{
 
   " gtags
   " 搜索当前光标下字符串的引用
-  noremap <leader>fr :<C-U><C-R>=printf("Leaderf gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+  "noremap <leader>fr :<C-U><C-R>=printf("Leaderf gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
   " 搜索当前光标下字符串的定义
-  noremap <leader>fd :<C-U><C-R>=printf("Leaderf gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+  "noremap <leader>fd :<C-U><C-R>=printf("Leaderf gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+  " 搜索当前光标下字符串的定义/引用
+  noremap <leader>fc :<C-U><C-R>=printf("Leaderf gtags --by-context %s", "")<CR><CR>
   " 打开最近一次的搜索结果
   noremap <leader>fo :<C-U><C-R>=printf("Leaderf gtags --recall %s", "")<CR><CR>
   " 跳转到最近一次的搜索结果的下一条
