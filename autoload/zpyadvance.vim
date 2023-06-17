@@ -82,6 +82,7 @@ function! s:leaderf() "{{{
   let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
   let g:Lf_RootMarkers = ['.root']
   let g:Lf_PreviewResult = {'Function':1, 'BufTag':1, 'Rg':1, 'Gtags':1}
+  let g:Lf_CommandMap = {'<C-UP>': ['<S-Up>'], '<C-Down>': ['<S-Down>']}
 
   let g:Lf_GtagsAutoGenerate = 1 " 生成的 tags 目录: $HOME/.LfCache/gtags/
   let g:Lf_GtagsSkipUnreadable = 1

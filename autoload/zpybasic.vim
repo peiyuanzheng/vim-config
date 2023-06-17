@@ -16,6 +16,7 @@ let g:loaded_zpybasic = 1
 function! zpybasic#config() abort "{{{
   call s:common()
   call s:mappings()
+  call s:tmux_integration()
 endfunction "}}}
 
 
@@ -187,5 +188,16 @@ function s:mappings() "{{{
   nnoremap <silent><leader>w :w!<cr>:redraw!<cr>
 endfunction "}}}
 
+
+" see :help tmux-integration
+function s:tmux_integration() "{{{
+  if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+    " Enable modified arrow keys, see  :help arrow_modifiers
+    execute "silent! set <xUp>=\<Esc>[@;*A"
+    execute "silent! set <xDown>=\<Esc>[@;*B"
+    execute "silent! set <xRight>=\<Esc>[@;*C"
+    execute "silent! set <xLeft>=\<Esc>[@;*D"
+  endif
+endfunction "}}}
 
 " vim:set ft=vim et sw=2:
